@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta 
-      name="viewport" 
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" 
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi"
     />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>alarming</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body>
     <form action="?" method="POST">
-      <div class="g-recaptcha" 
+      <div
+        class="g-recaptcha"
         data-sitekey="6LcHpSgqAAAAAI3a2KRuH5dUBwZbcVjbch27DYQr"
         data-size="compact"
         data-callback="captchaCallback"
-      ></div>      
+      ></div>
     </form>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
+      function waitForElm(selector) {
+        return new Promise((resolve) => {
+          if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+          }
+
+          const observer = new MutationObserver((mutations) => {
+            if (document.querySelector(selector)) {
+              observer.disconnect();
+              resolve(document.querySelector(selector));
+            }
+          });
+
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        });
+      }
+
       function captchaCallback(response) {
         if (typeof Captcha !== "undefined") {
           console.log(response);
@@ -26,9 +47,17 @@
         }
       }
 
-      document.addEventListener('click', function() {
-        if (typeof Click !== "undefined") {
-          Click.postMessage("clicked");
+      waitForElm("iframe[title='reCAPTCHA']").then((captchaIframe) => {
+        let captchaContent =
+          captchaIframe.contentWindow || captchaIframe.contentDocument;
+        if (captchaContent.document) captchaContent = captchaContent.document;
+
+        if (captchaContent) {
+          captchaContent.addEventListener("click", function () {
+            if (typeof Click !== "undefined") {
+              Click.postMessage("clicked");
+            }
+          });
         }
       });
     </script>
