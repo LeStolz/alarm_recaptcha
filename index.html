@@ -19,12 +19,18 @@
       ></div>      
     </form>
     <script>
-      function captchaCallback(response){
+      function captchaCallback(response) {
         if (typeof Captcha !== "undefined") {
           console.log(response);
           Captcha.postMessage(response);
         }
       }
+
+      document.addEventListener('click', function() {
+        if (typeof Click !== "undefined") {
+          Click.postMessage("clicked");
+        }
+      });
     </script>
   </body>
 </html>
