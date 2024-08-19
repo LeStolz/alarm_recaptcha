@@ -1,43 +1,22 @@
-<!doctype html>
-<html class="no-js" lang="">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="content-language" content="en" />
-
-  <title>alarming</title>
-
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-
-  <script src="https://www.google.com/recaptcha/api.js&onload=onloadCallback&render=explicit" async defer>
-  </script>
-</head>
-
-<body>
-  <div id="html_element"></div>
-
-  <script type="text/javascript">
-    var onloadCallback = function () {
-      console.log("grecaptcha is ready!");
-      grecaptcha.render('html_element', {
-        'sitekey': '6LcHpSgqAAAAAI3a2KRuH5dUBwZbcVjbch27DYQr',
-        'callback': verifyCallback
-      });
-    };
-
-    function verifyCallback(token) {
-      console.log(token);
-      try {
-        RecaptchaFlutterChannel.postMessage(token);
-
-        Captcha.postMessage(response);
-      } catch (e) {
-        console.log(e);
+<html>
+  <head>
+    <title>alarming</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body>
+    <div style='height: 60px;'></div>
+    <form action="?" method="POST">
+      <div class="g-recaptcha" 
+        data-sitekey="6LcHpSgqAAAAAI3a2KRuH5dUBwZbcVjbch27DYQr"
+        data-callback="captchaCallback"
+      ></div>      
+    </form>
+    <script>
+      function captchaCallback(response){
+        if (typeof Captcha !== "undefined") {
+          Captcha.postMessage(response);
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
