@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>alarming</title>
+    <script src="https://www.google.com/recaptcha/api.js?fallback=true" async defer></script>
+  </head>
+  <body>
+    <div style='height: 60px;'></div>
+    <form action="?" method="POST">
+      <div class="g-recaptcha" 
+        data-sitekey="6LcHpSgqAAAAAI3a2KRuH5dUBwZbcVjbch27DYQr"
+        data-callback="captchaCallback"
+      ></div>      
+    </form>
+    <script>
+      function captchaCallback(response){
+        if (typeof Captcha !== "undefined") {
+          Captcha.postMessage(response);
+        }
+      }
+    </script>
+  </body>
+</html>
