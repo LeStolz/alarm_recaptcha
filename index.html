@@ -8,25 +8,15 @@
   <meta http-equiv="content-language" content="en" />
 
   <title>alarming</title>
-  <!-- <meta property="fb:app_id" content="102048594658" /> -->
 
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
 
-  <script src="https://www.google.com/recaptcha/api.js?fallback=true&onload=onloadCallback&render=explicit" async defer>
+  <script src="https://www.google.com/recaptcha/api.js&onload=onloadCallback&render=explicit" async defer>
   </script>
 </head>
 
 <body>
-  <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LdRwZYUAAAAAPYTHRXs_JJHE78qOjm0VnY1Y_Ym"></script>
-  <script>
-    grecaptcha.ready(function () {
-      grecaptcha.execute('6LdRwZYUAAAAAPYTHRXs_JJHE78qOjm0VnY1Y_Ym', { action: 'homepage' }).then(function (token) {
-        // call flutter app
-      });
-    });
-  </script> -->
-
   <div id="html_element"></div>
 
   <script type="text/javascript">
@@ -42,8 +32,10 @@
       console.log(token);
       try {
         RecaptchaFlutterChannel.postMessage(token);
+
+        Captcha.postMessage(response);
       } catch (e) {
-        console.log("Something wrong...");
+        console.log(e);
       }
     }
   </script>
