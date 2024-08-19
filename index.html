@@ -28,11 +28,11 @@
         data-theme="dark"
       ></div>
     </form>
+    <div style="position: absolute; width: 164px; height: 64px"></div>
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
       function captchaCallback(response) {
         if (typeof Captcha !== "undefined") {
-          console.log(response);
           Captcha.postMessage(response);
         }
       }
