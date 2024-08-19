@@ -9,7 +9,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>alarming</title>
   </head>
-  <body>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+  >
     <form action="?" method="POST">
       <div
         class="g-recaptcha"
@@ -20,46 +29,12 @@
     </form>
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
-      function waitForElm(selector) {
-        return new Promise((resolve) => {
-          if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
-          }
-
-          const observer = new MutationObserver((mutations) => {
-            if (document.querySelector(selector)) {
-              observer.disconnect();
-              resolve(document.querySelector(selector));
-            }
-          });
-
-          observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-          });
-        });
-      }
-
       function captchaCallback(response) {
         if (typeof Captcha !== "undefined") {
           console.log(response);
           Captcha.postMessage(response);
         }
       }
-
-      waitForElm("iframe[title='reCAPTCHA']").then((captchaIframe) => {
-        let captchaContent =
-          captchaIframe.contentWindow || captchaIframe.contentDocument;
-        if (captchaContent.document) captchaContent = captchaContent.document;
-
-        if (captchaContent) {
-          captchaContent.addEventListener("click", function () {
-            if (typeof Click !== "undefined") {
-              Click.postMessage("clicked");
-            }
-          });
-        }
-      });
     </script>
   </body>
 </html>
